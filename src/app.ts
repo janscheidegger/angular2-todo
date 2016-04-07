@@ -1,23 +1,30 @@
-import {Component} from 'angular2/core'
-import {NameComponent} from './name-component'
-import {FRIEND_PROVIDERS, FriendService} from './friends'
+import {Component} from 'angular2/core';
+import {ROUTER_DIRECTIVES, ROUTER_PROVIDERS, RouteConfig} from 'angular2/router';
+
+// routable smart components
+import {NewTodo, TodoDetail, TodosList} from './routes/index';
+import {TodoService} from './services/todos';
 
 @Component({
-    selector: 'jazoon-app',
+    selector: 'todo-app',
     template: `
-        <h1>hello {{name}}</h1>
-        <ul> 
-            <li *ngFor="#friend of friendsService.list">{{friend}}</li>
-        </ul>
-    `,
-    directives: [NameComponent],
-    providers: [FRIEND_PROVIDERS]
+        <h1>Ng2Todos</h1>
+        <div>
+            <a [routerLink]="['TodoList']">Todos</a>
+            <a [routerLink]="['NewTodo']">New Todo</a>
+</div>
+        <router-outlet></router-outlet>
+        `,
+    directives: [ROUTER_DIRECTIVES],
+    providers: [ROUTER_PROVIDERS, TodoService],
+    styles: []
 })
+
+@RouteConfig([
+    {name: 'TodoList', path: '/todos', component: TodosList, useAsDefault: true},
+    {name: 'NewTodo', path: '/new', component: NewTodo}
+])
+
+
 export class App {
-    myName:string;
-    isDisabled: boolean = false;
-    foos: string[];
-    friends: string[];
-    constructor(public friendsService: FriendService) {
-    }
 }

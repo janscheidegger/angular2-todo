@@ -48,3 +48,9 @@ Global Services can be defined in bootstraps second argument in main.ts. => You 
  ngOnDestroy
 
 
+##Immutable
+
+this.arr = this.arr.concat([jals]);
+better than
+this.arr.push([jals]);
+
