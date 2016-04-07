@@ -54,3 +54,5 @@ this.arr = this.arr.concat([jals]);
 better than
 this.arr.push([jals]);
 
+changeDetection: changeDetectionStrategy.onPush; // On component, Better performance => no Dirty checking for this component
+
