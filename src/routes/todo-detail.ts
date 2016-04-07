@@ -1,5 +1,6 @@
 import {Component} from "angular2/core";
-import {TodoService} from "../services/todos";
+import {TodoService, Todo} from "../services/todos";
+import {RouteParams} from "angular2/router";
 @Component({
     selector: 'todo-detail',
     template: `
@@ -11,5 +12,8 @@ import {TodoService} from "../services/todos";
 })
 
 export class TodoDetail {
-    constructor(public todoService:TodoService){}
+    todo: Todo;
+    constructor(public todoService:TodoService, public routeParams: RouteParams){
+        this.todo = todoService.getTodoById(parseInt(routeParams.get('id')));
+    }
 }

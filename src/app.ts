@@ -5,6 +5,7 @@ import {ROUTER_DIRECTIVES, ROUTER_PROVIDERS, RouteConfig} from 'angular2/router'
 import {NewTodo, TodoDetail, TodosList} from './routes/index';
 import {TodoService} from './services/todos';
 
+
 @Component({
     selector: 'todo-app',
     template: `
@@ -12,7 +13,7 @@ import {TodoService} from './services/todos';
         <div>
             <a [routerLink]="['TodoList']">Todos</a>
             <a [routerLink]="['NewTodo']">New Todo</a>
-</div>
+        </div>
         <router-outlet></router-outlet>
         `,
     directives: [ROUTER_DIRECTIVES],
@@ -22,7 +23,9 @@ import {TodoService} from './services/todos';
 
 @RouteConfig([
     {name: 'TodoList', path: '/todos', component: TodosList, useAsDefault: true},
-    {name: 'NewTodo', path: '/new', component: NewTodo}
+    {name: 'NewTodo', path: '/new', component: NewTodo},
+    {name: 'TodoDetail', path: '/todos/:id', component: TodoDetail}
+    // {name: 'LazyComponent', path: 'lazy', loader: System.import('/someComponent')} Lazy Loading
 ])
 
 

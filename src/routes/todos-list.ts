@@ -1,14 +1,26 @@
 import {Component, Input} from "angular2/core";
 import {TodoService, Todo} from "../services/todos";
+import {ROUTER_DIRECTIVES} from "angular2/router";
 
 //Dumb Component
 @Component({
     selector: 'todo-list',
     template: `
     <ul>
-        <li *ngFor="#todo of todos">{{todo.text}}</li>
+        <li *ngFor="#todo of todos" [class.completed]="todo.completed">
+            <input type="checkbox" [(ngModel)]="todo.completed" />
+            <a [routerLink]="['TodoDetail', {id: todo.id}]">{{todo.text}}</a>
+        </li>
     </ul>
-    `
+    `,
+    directives: [ROUTER_DIRECTIVES],
+    styles:[
+        `
+            .completed {
+                text-decoration: line-through;
+            }
+        `
+    ]
 })
 class TodoList{
     @Input() todos: Todo[];

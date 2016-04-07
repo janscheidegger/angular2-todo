@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Output} from "angular2/core";
 import {TodoService, Todo} from "../services/todos";
+import {Router} from "angular2/router";
 
 @Component({
     selector: 'new-todo-input',
@@ -8,7 +9,9 @@ import {TodoService, Todo} from "../services/todos";
             <input type="text" [(ngModel)]="newTodo.text" />
             <button (click)="saveTodo()"> Save</button>
         </div>
-    `
+    `,
+    providers: [],
+    directives: []
 })
 class NewTodoInput {
     newTodo: Todo = {};
@@ -35,8 +38,9 @@ class NewTodoInput {
 
 
 export class NewTodo {
-    constructor(public todoService:TodoService){}
+    constructor(public todoService:TodoService, public router:Router){}
     addTodoToService(newTodo) {
         this.todoService.addTodo(newTodo);
+        this.router.navigate(['TodoList']);
     }
 }
