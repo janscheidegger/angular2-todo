@@ -8,6 +8,11 @@ let todoId = 1;
 
 export class TodoService {
     todos: Todo[] = [];
+    constructor() {
+        fetch('todos.json').then(res => res.json()).then(todos => {
+            this.todos = todos;
+        });
+    }
     addTodo(newTodo:Todo) {
         newTodo.id = todoId++;
         this.todos = this.todos.concat([newTodo]);
